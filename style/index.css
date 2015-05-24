@@ -1,7 +1,14 @@
 body {
+    margin: 10%;
     background-color: #275EEA;
 }
 
 #pointer {
     position:absolute;
+}
+
+.btn-xl {
+    font-size: 22px;
+    line-height: 1.666666;
+    padding: 30px 36px;
 }
