@@ -1,0 +1,31 @@
+body {
+    margin-top: 5%;
+    background-color: #275EEA;
+}
+
+#pointer {
+    position:absolute;
+}
+
+.btn-xl {
+    font-size: 24px;
+    line-height: 1.666666;
+    padding: 30px 36px;
+}
+
+.img-centered {
+    margin: 0 auto;
+}
+
+.btn-block {
+    margin-bottom: 20px;
+}
+
+.list-group-item-winner {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.list-group-item-winner > img {
+    margin-left: 10px;
+}
