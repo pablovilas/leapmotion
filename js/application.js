@@ -1,7 +1,7 @@
 var pointers = {};
 var clickables = [];
 var scores = [10, 23, 43, 65, 70];
-var TOP_OFFSET = -200;
+var TOP_OFFSET = -150;
 
 var Clickable = function (elem) {
     var clickable = this;
@@ -85,14 +85,14 @@ $(window.document).ready(function () {
     }).use('screenPosition', { scale: 0.90 });
     Leap.loopController.setBackground(true);
     $.ajax({ 
-            type: 'GET',
-            dataType: 'html',
-            async: false, 
-            url: 'main-menu.html',
-            success: function (content) {
-                replaceContent(content);
-                index();
-            }
+        type: 'GET',
+        dataType: 'html',
+        async: false, 
+        url: 'main-menu.html',
+        success: function (content) {
+            replaceContent(content);
+            index();
+        }
     });
 });
 
@@ -213,6 +213,7 @@ function highScores() {
 }
 
 function play(opts) {
+    var duration = '1m';
     var returnBtn = $('#return');
     clickables.push(new Clickable(returnBtn));
     returnBtn.on('click', function () {
@@ -229,10 +230,15 @@ function play(opts) {
     });
     
     if (opts.short) {
-    
+        duration = '1m';
     } else if (opts.long) {
+        duration = '3m';
+    }
     
-    } else {
-    
-    }    
+    $('#time-left').timer({
+        duration: duration,
+        callback: function() {
+            alert('Time up!');
+        }
+    });
 }
