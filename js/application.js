@@ -1,7 +1,29 @@
 var pointers = {};
 var clickables = [];
 var scores = [10, 23, 43, 65, 70];
+var gestures = [
+    function leftIndex(hand, square) {
+        if (hand.type == 'left') {
+            
+        }
+        return false;
+    },
+    function rightIndex(hand, square) {
+    
+    }
+];
+var game = [];
 var TOP_OFFSET = -150;
+var GESTURE_DURATION = 10;
+var CURRENT_GESTURE = -1;
+var DURATIONS = {
+    short: { code: '1m', duration: 60  },
+    long : { code: '3m', duration: 180 }
+}
+
+var fingerPos = {};
+var squarePos = {};
+//gestures[game[CURRENT_GESTURE].gesture](fingerPos, squarePos);
 
 var Clickable = function (elem) {
     var clickable = this;
@@ -213,7 +235,7 @@ function highScores() {
 }
 
 function play(opts) {
-    var duration = '1m';
+    var duration = DURATIONS.short;
     var returnBtn = $('#return');
     clickables.push(new Clickable(returnBtn));
     returnBtn.on('click', function () {
@@ -230,15 +252,46 @@ function play(opts) {
     });
     
     if (opts.short) {
-        duration = '1m';
+        duration = DURATIONS.short;
     } else if (opts.long) {
-        duration = '3m';
+        duration = DURATIONS.long;
+    }
+    
+    buildGame(duration)
+}
+
+function buildGame (duration) {
+    
+    game = [];
+    CURRENT_GESTURE = 0;
+    
+    // Returns a random integer between min (inclusive) and max (inclusive)
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    
+    var totalSeconds = duration.duration;
+    var totalGestures = Math.round(totalSeconds / GESTURE_DURATION);
+    for (var i = 0; i < totalGestures; i++) {
+        var squareIdx = getRandomInt(1, 9);
+        var squareElem = $('#square-' + squareIdx);
+        var playable = new Clickable(squareElem);
+        game.push({ square: playable, gesture: getRandomInt(0, gestures.length), score: 0 });
     }
     
     $('#time-left').timer({
-        duration: duration,
-        callback: function() {
-            alert('Time up!');
+        duration: duration.code,
+        callback: finishGame
+    });
+    
+    $('#gesture-time').timer({
+        duration: GESTURE_DURATION,
+        callback: function () {
+        
         }
     });
+}
+
+function finishGame() {
+    alert('Termino!');
 }
