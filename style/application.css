@@ -29,3 +29,16 @@ body {
 .list-group-item-winner > img {
     margin-left: 10px;
 }
+
+.jumbotron {
+    padding: 5.5em;
+}
+
+.game-text {
+    text-align: center;
+    color: #EEE;
+}
+
+#current-order {
+    margin-bottom: 1em;
+}
