@@ -213,7 +213,7 @@ gestures.push(gestureRightRing);
 gestures.push(gestureLeftPinky);
 gestures.push(gestureRightPinky);
 
-$(window.document).ready(function () {                
+$(window.document).ready(function () { 
     Leap.loop({ enableGestures: true }, function (frame) {
         if (frame.valid) {
             if (CURRENT_GESTURE > -1) {
@@ -332,7 +332,9 @@ function index() {
                 highScores();
             }
         });
-    });   
+    });  
+    
+    initHelp();
 }
 
 function newGame() {
@@ -528,4 +530,15 @@ function finishGame() {
         scores.pop();
     }
     scores.push(score);
+}
+
+function initHelp() {
+    var help = $('#help');
+    if (help && help.length > 0) {
+        setTimeout(function () {
+            help.fadeOut(750);
+            help.fadeIn(750);
+            initHelp();
+        }, 3000);
+    }
 }

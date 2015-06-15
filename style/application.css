@@ -42,3 +42,10 @@ body {
 #current-order {
     margin-bottom: 1em;
 }
+
+.img-help {
+    position: fixed;
+    z-index: 5;
+    right: 15px;
+    bottom: 15px;
+}
