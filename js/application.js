@@ -474,7 +474,7 @@ function buildGame (duration, reset) {
                     }
                 },
                 stop: function () {
-                    finishGame();
+                    $('#current-order').html('Juego finalizado. Presiona volver para ir al menú');
                 }
             }
         });
